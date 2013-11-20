@@ -1,0 +1,7 @@
+#!/bin/sh
+
+export BOSH_INSTALL_TARGET=/var/vcap/packages/$1
+echo \-\> compiling: $BOSH_INSTALL_TARGET
+cd $BOSH_INSTALL_TARGET
+
+sh packaging

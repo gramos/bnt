@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby 
+
+require 'btt/env'
+
+puts "==> Using #{Cage.path}"
+puts "-> [ Creating bosh dirs structure ]"
+
+bosh_dirs = "/var/vcap/packages/ /var/vcap/jobs/ /var/vcap/sys/run /var/vcap/sys/log/ /var/vcap/store"
+
+Runner.exec "chroot #{Cage.path} mkdir -p #{bosh_dirs}"
+
+
+
+
