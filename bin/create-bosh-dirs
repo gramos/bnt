@@ -5,9 +5,11 @@ require_relative '../lib/btt/env'
 puts "==> Using #{Cage.path}"
 puts "-> [ Creating bosh dirs structure ]"
 
-bosh_dirs = "/var/vcap/packages/ /var/vcap/jobs/ /var/vcap/sys/run /var/vcap/sys/log/ /var/vcap/store"
+bosh_dirs = "/var/vcap/packages/ /var/vcap/jobs/ /var/vcap/sys/run /var/vcap/sys/log/ /var/vcap/store /var/vcap/btt"
 
 Runner.exec "sudo chroot #{Cage.path} mkdir -p #{bosh_dirs}"
 
-
+puts "-> [ Copying scripts to cage ]"
+builder_script_path = 'bin/make-package'
+Runner.exec "sudo cp #{builder_script_path} #{Cage.path}/var/vcap/btt/"
 

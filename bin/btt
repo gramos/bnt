@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby 
 
-require 'btt/env'
+require_relative '../lib/btt/env'
 
 package_path       = ARGV[0] 
 package_name       = package_path.split("/").last
@@ -11,12 +11,12 @@ release_path.pop
 release_path.pop
 release_path = release_path.join("/")
 
-Runner.exec "mkdir -p #{Cage.package_path(package_name)}" 
-Runner.exec "mount --bind #{package_path} #{Cage.package_path(package_name)}"
+Runner.exec "sudo mkdir -p #{Cage.package_path(package_name)}" 
+Runner.exec "sudo mount --bind #{package_path} #{Cage.package_path(package_name)}"
 
-Runner.exec "mkdir -p #{Cage.package_path(package_name)}/#{package_name}"
-Runner.exec "mount --bind #{release_path}/src/#{package_name} #{Cage.package_path(package_name)}/#{package_name}"
+Runner.exec "sudo mkdir -p #{Cage.package_path(package_name)}/#{package_name}"
+Runner.exec "sudo mount --bind #{release_path}/src/#{package_name} #{Cage.package_path(package_name)}/#{package_name}"
  
-Runner.exec "chroot #{Cage.path} sh /var/vcap/btt/make-package #{package_name} "
+Runner.exec "sudo chroot #{Cage.path} sh /var/vcap/btt/make-package #{package_name} "
 
 
