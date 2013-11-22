@@ -13,13 +13,10 @@ release_path = release_path.join("/")
 
 Runner.exec "sudo mkdir -p #{Cage.package_path(package_name)}"
 
-unless File.directory? Cage.tmp_dir(package_name)
-  Runner.exec "sudo mkdir #{Cage.tmp_dir(package_name)}"
+unless File.directory? Cage.tmp_dir
+  Runner.exec "sudo mkdir #{Cage.tmp_dir}"
 end
 
-Runner.exec "sudo mount --bind #{package_path} #{Cage.tmp_dir(package_name)}"
+Runner.exec "sudo mount --bind #{release_path} #{Cage.tmp_dir}"
 
-Runner.exec "sudo mkdir -p #{Cage.package_path(package_name)}/#{package_name}"
-Runner.exec "sudo mount --bind #{release_path}/src/#{package_name} #{Cage.package_path(package_name)}/#{package_name}"
-
-Runner.exec "sudo chroot #{Cage.path} sh /var/vcap/btt/make-package #{package_name} "
+Runner.exec "sudo chroot #{Cage.path} sh /var/vcap/bnt/bnt-make-package #{package_name} "

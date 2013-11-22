@@ -15,8 +15,8 @@ EOS
     "#{path}#{packages_path}/#{pkg}"
   end
 
-  def self.tmp_dir(pkg)
-    "#{path}/tmp/#{pkg}"
+  def self.tmp_dir
+    "#{path}/tmp/bosh-release"
   end
 end
 

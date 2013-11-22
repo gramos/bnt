@@ -1,7 +1,20 @@
 #!/bin/sh
 
 export BOSH_INSTALL_TARGET=/var/vcap/packages/$1
-echo \-\> compiling: $BOSH_INSTALL_TARGET
-cd $BOSH_INSTALL_TARGET
+export BOSH_COMPILE_TARGET=/tmp/bosh-compile/
+export BOSH_RELEASE_DIR=/tmp/bosh-release
 
-sh packaging
+mkdir -p $BOSH_COMPILE_TARGET
+ 
+echo \-\> compiling: $BOSH_INSTALL_TARGET
+cd $BOSH_COMPILE_TARGET
+
+if [ ! -f $1 ]; then
+  ln -s  $BOSH_RELEASE_DIR/src/$1 $1
+fi
+
+. $BOSH_RELEASE_DIR/packages/$1/packaging
+
+# Remove the sources
+rm -rf $BOSH_COMPILE_TARGET
+
