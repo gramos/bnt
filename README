@@ -6,4 +6,6 @@ $ export CAGE_PATH=/path/to/some/cage
 $ ./bin/create_bosh_dirs
 $ ./bin/btt path/to/bosh/package
 
+You'll need root permissions to use BNT.
 
+Have fun!
