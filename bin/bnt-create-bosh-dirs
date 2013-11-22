@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby 
 
-require 'btt/env'
+require 'bnt/env'
 
 puts "==> Using #{Cage.path}"
 puts "-> [ Creating bosh dirs structure ]"
