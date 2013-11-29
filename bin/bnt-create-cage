@@ -4,7 +4,7 @@ require_relative '../lib/bnt/env'
 require 'fileutils'
 
 def download_stemcell(cache_path)
-  FileUtils.cd cache_path do 
+  FileUtils.cd cache_path do
     Runner.exec "wget -c http://bosh-jenkins-gems-warden.s3.amazonaws.com/stemcells/latest-bosh-stemcell-warden.tgz"
   end
 end
@@ -20,18 +20,24 @@ def gunzip_stemcell_img(cage_path)
     stemcell_version = `grep "^version:" stemcell.MF`
     msg = "decompressing stemcell #{stemcell_version}"
     `mv image image.tar.gz`
-    Runner.exec :cmd => "tar -xzf image.tar.gz", :msg => msg
+    Runner.exec :cmd => "sudo -E tar -xzf image.tar.gz", :msg => msg
   end  
 end
 
 cache_path           = File.expand_path('~/.bnt/cache/')
 cache_stemcell_path  = "#{cache_path}/latest-bosh-stemcell-warden.tgz"
 cage_path            = File.expand_path('~/.bnt/cages/latest-bosh-stemcell')
-image_stemcell_path  = 
 
 Runner.exec "mkdir -p #{cache_path}"
 Runner.exec "mkdir -p #{cage_path}"
 
-download_stemcell(cage_path) unless File.exist? cache_stemcell_path
-untar_stemcell(cage_path, cache_stemcell_path)
-gunzip_stemcell_img(cage_path)
+download_stemcell cache_path 
+untar_stemcell cage_path, cache_stemcell_path
+gunzip_stemcell_img cage_path
+
+ENV['CAGE_PATH'] = cage_path
+Runner.exec "./bin/bnt-create-bosh-dirs"
+
+Runner.exec "sudo cp /etc/resolv.conf #{cage_path}/etc/"
+
+puts "now you can use this new cage doing 'export CAGE_PATH=#{cage_path}'"

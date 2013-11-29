@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/bnt/env'
+require "readline"
+
+Runner.exec "sudo umount #{Cage.tmp_dir}"
+
+puts "\n\nWARNING!!! I'm going to delete #{Cage.path}"
+input = Readline.readline("yes|no >", true)
+Runner.exec  "sudo rm -rf #{Cage.path}" if input == "yes"
+

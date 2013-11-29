@@ -1,10 +1,11 @@
-#!/bin/sh
+#!/bin/sh -x
 
 export BOSH_INSTALL_TARGET=/var/vcap/packages/$1
 export BOSH_COMPILE_TARGET=/tmp/bosh-compile/
 export BOSH_RELEASE_DIR=/tmp/bosh-release
 
 mkdir -p $BOSH_COMPILE_TARGET
+mkdir -p $BOSH_RELEASE_DIR
  
 echo \-\> compiling: $BOSH_INSTALL_TARGET
 cd $BOSH_COMPILE_TARGET

@@ -17,6 +17,10 @@ unless File.directory? Cage.tmp_dir
   Runner.exec "sudo mkdir #{Cage.tmp_dir}"
 end
 
-Runner.exec "sudo mount --bind #{release_path} #{Cage.tmp_dir}"
+mount_check = `mount | grep #{Cage.path}`
+
+if mount_check.empty?
+  Runner.exec "sudo mount --bind #{release_path} #{Cage.tmp_dir}"
+end
 
 Runner.exec "sudo chroot #{Cage.path} sh /var/vcap/bnt/bnt-make-package #{package_name} "
