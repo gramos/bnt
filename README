@@ -3,8 +3,9 @@ BOSH Ninja Tools
 Usage
 
 $ export CAGE_PATH=/path/to/some/cage
-$ ./bin/create_bosh_dirs
-$ ./bin/btt path/to/bosh/package
+$ ./bin/bnt-create-bosh-dirs
+$ sudo -E ./bin/bnt-create-cage
+$ ./bin/bnt path/to/bosh/package
 
 You'll need root permissions to use BNT.
 
