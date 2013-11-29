@@ -21,8 +21,16 @@ EOS
 end
 
 class Runner
-  def self.exec(cmd)
-    puts cmd
+  def self.exec(args)
+    msg = ""
+    cmd = args
+
+    if args.is_a? Hash
+      cmd = args[:cmd]
+      msg = "* #{args[:msg]}"
+    end
+
+    puts "#{msg} ==> #{cmd}"
     system cmd
   end
 end
