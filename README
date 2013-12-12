@@ -1,11 +1,19 @@
 BOSH Ninja Tools
+================
+
+Bnt is a fast way to test bosh package compilation using chroot
 
 Usage
+-----
 
-$ export CAGE_PATH=/path/to/some/cage
-$ ./bin/bnt-create-bosh-dirs
+gem install bnt
+
+$ export CAGE_PATH=~/.bnt/cages/latest-bosh-stemcell/
 $ sudo -E ./bin/bnt-create-cage
-$ ./bin/bnt path/to/bosh/package
+
+Now you are able to start testing your bosh packages like this:
+
+$ ./bin/bnt /path/to/bosh/package
 
 You'll need root permissions to use BNT.
 

@@ -1,7 +1,7 @@
 class Cage
 
   def self.path
-    error_msg = <<-EOS "\n\nEmpty cage path please ensure that CAGE_PATH env var is available 'export CAGE_PATH=/home/user/bosh-cages'"
+    error_msg = <<-EOS "\n\nEmpty cage path please ensure that CAGE_PATH env var is available 'export CAGE_PATH=~/.bnt/cages/latest-bosh-stemcell/'"
 EOS
     raise error_msg if ENV['CAGE_PATH'].nil?
     ENV['CAGE_PATH']
